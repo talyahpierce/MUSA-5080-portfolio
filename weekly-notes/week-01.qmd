@@ -37,5 +37,6 @@ sessionInfo()$R.version$version.string
 
 I want to become better at using Github and creating a portfolio of projects. I feel pretty comfortable with statistics and coding, but I'm excited to have something to show for it. I'm only really nervous about having Github-specific technical issues in all honesty (let's hope you can even see this message). I am also guilty of having poor file management/organizational skills. My current question is how does this class pair well with the other MUSA Spatial Statistics class, and how do they complement each other/overlap in some areas?
 
--
--
+One thing I learned on Friday is that I can make my own website using R (not the most creative answer)!
+
+
