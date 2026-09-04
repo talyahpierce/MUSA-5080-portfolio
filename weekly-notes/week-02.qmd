@@ -1,0 +1,28 @@
+---
+title: "Week 2: dplyr and Census"
+description: "Table functions and ACS data."
+date: 2026-09-04
+---
+
+## What We Did
+
+
+
+## Key Concepts
+
+
+
+The loop: **Edit → Save → Render → Commit → Push → wait → refresh**
+
+## Proving R Works
+
+The chunk below runs when this page renders. If you can see a result underneath
+it on your published site, R and Quarto are talking to each other correctly.
+
+```{r}
+sessionInfo()$R.version$version.string
+```
+
+## Reflection
+
+
