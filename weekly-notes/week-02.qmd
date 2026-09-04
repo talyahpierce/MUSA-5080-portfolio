@@ -6,23 +6,46 @@ date: 2026-09-04
 
 ## What We Did
 
-
+We reviewed notes on dplyr and using the Census API (tidycensus).
 
 ## Key Concepts
 
+**'dplyr' Functions**
 
+- filter() // pick rows
+- select() // pick columns
+- mutate() // add new computed column
+- arrange() // change order of rows in ascending and descending
+- group_by() + summarize() // groups rows by a common function using a specific operation
+- case_when() // regrouping row values
 
-The loop: **Edit → Save → Render → Commit → Push → wait → refresh**
+**Census and ACS**
 
-## Proving R Works
+The Decennial Census surveys essentially the entire population in 10 years. Census geography goes in the following order: 
 
-The chunk below runs when this page renders. If you can see a result underneath
-it on your published site, R and Quarto are talking to each other correctly.
+STATE \
+COUNTY \
+TRACT ("Neighborhood" around 5,000-8,000, changing boundaries) \
+BLOCK GROUP (higher MOE, Decennial Census only) \
 
-```{r}
-sessionInfo()$R.version$version.string
-```
+The American Community Survey (ACS) became a thing in around 2005, surveying about 3% of households to provide an estimate for the larger population. The ACS previously had a survey that was conducted every 3 years, however, that no longer exists. The 1-year ACS data exists for geographic areas with more than 65,000 people. The 5-year ACS data exists at the block group and tract level. ACS data includes an estimate and a margin of error (MOE)
+
+**GEOIDs**
+
+GEOIDs are a unique gegraphic identifier code. The first two digits indicate the state, the following three indicate the county, and the last 5-6 indicate the tract.
+
+**'tidycensus' Functions**
+
+- load_variables() // provides a codebook of variable names
+- get_acs() // retrieves data from Census API \ 
+
+*Example: data <- get_acs(geography = "county",*\
+                        *variables = c("B19013_001", "B01003_001"),*\
+                        *state = "PA",*\
+                        *year = 2023,*\
+                        *survey = "acs5")*\
+      
 
 ## Reflection
 
-
+I am already pretty familiar with the tidyverse/dplyr and tidycensus packages, so this class was pretty digestible. Nice to know more about the specifics of the background of the ACS and Census geography designations and history behind it.

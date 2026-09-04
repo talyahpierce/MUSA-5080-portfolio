@@ -112,24 +112,38 @@
     "text": "Code\n\n\n\n\nData files for MUSA 5080\nDownload assignment data from Canvas and save it here. Do not rename the files! Have a nice day :)"
   },
   {
+    "objectID": "weekly-notes/week-02.html",
+    "href": "weekly-notes/week-02.html",
+    "title": "Week 2: dplyr and Census",
+    "section": "",
+    "text": "We reviewed notes on dplyr and using the Census API (tidycensus)."
+  },
+  {
+    "objectID": "weekly-notes/week-02.html#what-we-did",
+    "href": "weekly-notes/week-02.html#what-we-did",
+    "title": "Week 2: dplyr and Census",
+    "section": "",
+    "text": "We reviewed notes on dplyr and using the Census API (tidycensus)."
+  },
+  {
     "objectID": "weekly-notes/week-02.html#key-concepts",
     "href": "weekly-notes/week-02.html#key-concepts",
     "title": "Week 2: dplyr and Census",
     "section": "Key Concepts",
-    "text": "Key Concepts\nThe loop: Edit → Save → Render → Commit → Push → wait → refresh"
+    "text": "Key Concepts\n‘dplyr’ Functions\n\nfilter() // pick rows\nselect() // pick columns\nmutate() // add new computed column\narrange() // change order of rows in ascending and descending\ngroup_by() + summarize() // groups rows by a common function using a specific operation\n\nCensus and ACS\nThe Decennial Census surveys essentially the entire population in 10 years. Census geography goes in the following order:\nSTATE\nCOUNTY\nTRACT (“Neighborhood” around 5,000-8,000, changing boundaries)\nBLOCK GROUP (higher MOE, Decennial Census only)\n\nThe American Community Survey (ACS) became a thing in around 2005, surveying about 3% of households to provide an estimate for the larger population. The ACS previously had a survey that was conducted every 3 years, however, that no longer exists. The 1-year ACS data exists for geographic areas with more than 65,000 people. The 5-year ACS data exists at the block group and tract level. ACS data includes an estimate and a margin of error (MOE)\nGEOIDs\nGEOIDs are a unique gegraphic identifier code. The first two digits indicate the state, the following three indicate the county, and the last 5-6 indicate the tract.\n‘tidycensus’ Functions\n\nload_variables() // provides a codebook of variable names\nget_acs() // retrieves data from Census API  \n\nExample: data &lt;- get_acs(geography = “county”,\nvariables = c(“B19013_001”, “B01003_001”),\nstate = “PA”,\nyear = 2023,\nsurvey = “acs5”)"
   },
   {
     "objectID": "weekly-notes/week-02.html#proving-r-works",
     "href": "weekly-notes/week-02.html#proving-r-works",
     "title": "Week 2: dplyr and Census",
     "section": "Proving R Works",
-    "text": "Proving R Works\nThe chunk below runs when this page renders. If you can see a result underneath it on your published site, R and Quarto are talking to each other correctly.\n\nsessionInfo()$R.version$version.string\n\n[1] \"R version 4.5.1 (2025-06-13)\""
+    "text": "Proving R Works\n\nsessionInfo()$R.version$version.string\n\n[1] \"R version 4.5.1 (2025-06-13)\""
   },
   {
     "objectID": "weekly-notes/week-02.html#reflection",
     "href": "weekly-notes/week-02.html#reflection",
     "title": "Week 2: dplyr and Census",
     "section": "Reflection",
-    "text": "Reflection"
+    "text": "Reflection\nI am already pretty familiar with the tidyverse/dplyr and tidycensus packages, so this class was pretty digestible. Nice to know more about the specifics of the background of the ACS and Census geography designations and history behind it."
   }
 ]

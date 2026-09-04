@@ -204,14 +204,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="what-we-did" class="level2">
 <h2 class="anchored" data-anchor-id="what-we-did">What We Did</h2>
+<p>We reviewed notes on dplyr and using the Census API (tidycensus).</p>
 </section>
 <section id="key-concepts" class="level2">
 <h2 class="anchored" data-anchor-id="key-concepts">Key Concepts</h2>
-<p>The loop: <strong>Edit → Save → Render → Commit → Push → wait → refresh</strong></p>
+<p><strong>‘dplyr’ Functions</strong></p>
+<ul>
+<li>filter() // pick rows</li>
+<li>select() // pick columns</li>
+<li>mutate() // add new computed column</li>
+<li>arrange() // change order of rows in ascending and descending</li>
+<li>group_by() + summarize() // groups rows by a common function using a specific operation</li>
+</ul>
+<p><strong>Census and ACS</strong></p>
+<p>The Decennial Census surveys essentially the entire population in 10 years. Census geography goes in the following order:</p>
+<p>STATE<br>
+COUNTY<br>
+TRACT (“Neighborhood” around 5,000-8,000, changing boundaries)<br>
+BLOCK GROUP (higher MOE, Decennial Census only)<br>
+</p>
+<p>The American Community Survey (ACS) became a thing in around 2005, surveying about 3% of households to provide an estimate for the larger population. The ACS previously had a survey that was conducted every 3 years, however, that no longer exists. The 1-year ACS data exists for geographic areas with more than 65,000 people. The 5-year ACS data exists at the block group and tract level. ACS data includes an estimate and a margin of error (MOE)</p>
+<p><strong>GEOIDs</strong></p>
+<p>GEOIDs are a unique gegraphic identifier code. The first two digits indicate the state, the following three indicate the county, and the last 5-6 indicate the tract.</p>
+<p><strong>‘tidycensus’ Functions</strong></p>
+<ul>
+<li>load_variables() // provides a codebook of variable names</li>
+<li>get_acs() // retrieves data from Census API &nbsp;</li>
+</ul>
+<p><em>Example: data &lt;- get_acs(geography = “county”,</em><br>
+<em>variables = c(“B19013_001”, “B01003_001”),</em><br>
+<em>state = “PA”,</em><br>
+<em>year = 2023,</em><br>
+<em>survey = “acs5”)</em><br>
+</p>
 </section>
 <section id="proving-r-works" class="level2">
 <h2 class="anchored" data-anchor-id="proving-r-works">Proving R Works</h2>
-<p>The chunk below runs when this page renders. If you can see a result underneath it on your published site, R and Quarto are talking to each other correctly.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()<span class="sc">$</span>R.version<span class="sc">$</span>version.string</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -221,6 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="reflection" class="level2">
 <h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
+<p>I am already pretty familiar with the tidyverse/dplyr and tidycensus packages, so this class was pretty digestible. Nice to know more about the specifics of the background of the ACS and Census geography designations and history behind it.</p>
 
 
 <!-- -->
@@ -704,25 +733,53 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## What We Did</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>We reviewed notes on dplyr and using the Census API (tidycensus).</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Key Concepts</span></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>**'dplyr' Functions**</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>The loop: **Edit → Save → Render → Commit → Push → wait → refresh**</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Proving R Works</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>The chunk below runs when this page renders. If you can see a result underneath</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>it on your published site, R and Quarto are talking to each other correctly.</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()<span class="sc">$</span>R.version<span class="sc">$</span>version.string</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reflection</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>filter() // pick rows</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>select() // pick columns</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>mutate() // add new computed column</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>arrange() // change order of rows in ascending and descending</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>group_by() + summarize() // groups rows by a common function using a specific operation</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>**Census and ACS**</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>The Decennial Census surveys essentially the entire population in 10 years. Census geography goes in the following order: </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>STATE \</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>COUNTY \</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>TRACT ("Neighborhood" around 5,000-8,000, changing boundaries) \</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>BLOCK GROUP (higher MOE, Decennial Census only) \</span>
 <span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>The American Community Survey (ACS) became a thing in around 2005, surveying about 3% of households to provide an estimate for the larger population. The ACS previously had a survey that was conducted every 3 years, however, that no longer exists. The 1-year ACS data exists for geographic areas with more than 65,000 people. The 5-year ACS data exists at the block group and tract level. ACS data includes an estimate and a margin of error (MOE)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>**GEOIDs**</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>GEOIDs are a unique gegraphic identifier code. The first two digits indicate the state, the following three indicate the county, and the last 5-6 indicate the tract.</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>**'tidycensus' Functions**</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>load_variables() // provides a codebook of variable names</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>get_acs() // retrieves data from Census API \ </span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>*Example: data &lt;- get_acs(geography = "county",*\</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>                        *variables = c("B19013_001", "B01003_001"),*\</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>                        *state = "PA",*\</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>                        *year = 2023,*\</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>                        *survey = "acs5")*\</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## Proving R Works</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()<span class="sc">$</span>R.version<span class="sc">$</span>version.string</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reflection</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>I am already pretty familiar with the tidyverse/dplyr and tidycensus packages, so this class was pretty digestible. Nice to know more about the specifics of the background of the ACS and Census geography designations and history behind it.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
