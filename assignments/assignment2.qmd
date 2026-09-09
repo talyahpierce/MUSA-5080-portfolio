@@ -2,7 +2,7 @@
 title: "Assignment 2: Who Do We Know the Least About?"
 subtitle: "Measuring uncertainty in American Community Survey data"
 author: "Talyah Pierce"
-date: "September 8th, 2026"
+date: today
 format:
   html:
     toc: true
