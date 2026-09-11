@@ -1,0 +1,36 @@
+---
+title: "Week 3: ggplot and data viz"
+description: "Derived uncertainty and ggplot."
+date: 2026-09-11
+---
+
+## What We Did
+
+We reviewed notes on data visualizations in ggplot.
+
+## Key Concepts
+
+**Different types of ggplots**
+
+If I want to know how a variable is spread... use **geom_histogram()** \
+
+If I want to know how two variables relate... use **geom_point()** \
+
+If I want to see how two groups compare... use **geom_boxplot()** or **geom_col()** \
+
+If I want to see how things change over time... use **geom_line()** \
+
+If I want to see how uncertain a value is... use **geom_errorbar()** \
+
+If I want to see multiple plots for different categories... use **facet_wrap(~variable)** \
+
+**Statistics terms**
+
+**Coefficient of Variation (CV)** is the relative measure of sampling error. The **standard error** tells us how confident we can be that an estimate is reflective of the true population. For the Census Bureau, a low confidence interval is around 15% (high reliability), medium confidence interval is around 15%-30%, and a high confidece interval is 30% or above (high sampling error).
+
+**Derived Uncertainty**
+
+
+## Reflection
+
+I am familiar with making plots in ggplot, but this was a good refresher and sort of anatomical breakdown of ggplot code. Sometimes when I use ggplot I don't think too much about the structure of the code (copy and pasting it, using AI to make my graphs prettier...), so this was great!!
