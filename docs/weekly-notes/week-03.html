@@ -221,8 +221,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>If I want to see multiple plots for different categories… use <strong>facet_wrap(~variable)</strong><br>
 </p>
 <p><strong>Statistics terms</strong></p>
-<p><strong>Coefficient of Variation (CV)</strong> is the relative measure of sampling error. The <strong>standard error</strong> tells us how confident we can be that an estimate is reflective of the true population. For the Census Bureau, a low confidence interval is around 15% (high reliability), medium confidence interval is around 15%-30%, and a high confidece interval is 30% or above (high sampling error).</p>
-<p><strong>Derived Uncertainty</strong></p>
+<p><strong>Coefficient of Variation (CV)</strong> is the relative measure of sampling error. The <strong>standard error</strong> tells us how confident we can be that an estimate is reflective of the true population. For the Census Bureau, a low confidence interval is around 15% (high reliability), medium confidence interval is around 15%-30%, and a high confidence interval is 30% or above (high sampling error).</p>
+<p><strong>Derived Uncertainty</strong> - moe_sum() // adding estimates together - moe_prop() // one estimate as a share of another - moe_ratio() // one not a subset of another</p>
+<p>The <strong>standard error of difference</strong> is sqrt(se1^2 + se2^2).</p>
 </section>
 <section id="reflection" class="level2">
 <h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
@@ -730,14 +731,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>**Statistics terms**</span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>**Coefficient of Variation (CV)** is the relative measure of sampling error. The **standard error** tells us how confident we can be that an estimate is reflective of the true population. For the Census Bureau, a low confidence interval is around 15% (high reliability), medium confidence interval is around 15%-30%, and a high confidece interval is 30% or above (high sampling error).</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>**Coefficient of Variation (CV)** is the relative measure of sampling error. The **standard error** tells us how confident we can be that an estimate is reflective of the true population. For the Census Bureau, a low confidence interval is around 15% (high reliability), medium confidence interval is around 15%-30%, and a high confidence interval is 30% or above (high sampling error).</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>**Derived Uncertainty**</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reflection</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>moe_sum() // adding estimates together </span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>moe_prop() // one estimate as a share of another </span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>moe_ratio() // one not a subset of another</span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>I am familiar with making plots in ggplot, but this was a good refresher and sort of anatomical breakdown of ggplot code. Sometimes when I use ggplot I don't think too much about the structure of the code (copy and pasting it, using AI to make my graphs prettier...), so this was great!!</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>The **standard error of difference** is sqrt(se1^2 + se2^2).</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reflection</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>I am familiar with making plots in ggplot, but this was a good refresher and sort of anatomical breakdown of ggplot code. Sometimes when I use ggplot I don't think too much about the structure of the code (copy and pasting it, using AI to make my graphs prettier...), so this was great!!</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
