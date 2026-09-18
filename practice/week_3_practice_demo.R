@@ -156,6 +156,7 @@ poverty_share <- get_acs(
 
 ## Change over time
 
+
 get_poverty <- function(yr) {
   get_acs(
     geography = "county",

@@ -1,0 +1,38 @@
+---
+title: "Week 4: GIS in R"
+description: "Using spatial data in R."
+date: 2026-09-18
+---
+
+## What We Did
+
+
+
+## Key Concepts
+
+**Review**
+- The Census operates based on a 90% confidence interval to calculate the MOE
+- You then take the MOE and divide it by 1,645 to get the standard error. Then, you do the standard error difference which is sqrt(se1^2 + se2^2)
+
+**Spatial Data Function**
+- get_acs(..., geometry = TRUE) // creates the tidycensus data as a shapefile (*sf*)
+- st_set_crs() // adding the correct label
+- st_transform(data, coordinate type) // change the coordinate system
+- st_crs() // gets the coordinate system of the data
+- st_buffer(data, units of the layer) // create a buffer zone around a data point
+- st_intersects() // data points share a border with each other or are situated within each other
+- st_touches() // only if two polygons or lines touch each other
+- st_within() // only if one polygon is located within another
+- st_filer() // count the tract
+- st_intersection() // shapes change and more shape 
+- st_union // append?
+- st_join // works like a normal join, just spatially
+- st_distance // returns a matrix with the distance between all of your stations and tracts
+
+
+**Coordinate Reference Systems (CRS)**
+Geographic coordinates live on a sphere, and are measured in the degrees as angular measurements form the center of the Earth.
+
+## Reflection
+
+
