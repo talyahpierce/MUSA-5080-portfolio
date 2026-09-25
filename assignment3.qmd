@@ -395,7 +395,13 @@ compareyrs_income %>%
 
 ```
 
-## Main Takeaways ##
+## Rewriting the Central Paragraph ##
 
-After investigating the claims made by the WHYY article, it is clear that interpretation of ACS data is not straightforwarf, especially when comparing data between different time periods. More granular geographic areas require attention as sampling small populations can leave room for noise in the data. In the case of this article, misinterpretation or failing to further investigate the change in the margin of error can lead to overstating claims. Again, it is important to consider that the original author may have used different neighborhood boundaries. Stil, the claim that Eastwick experienced the highest rate of poverty increase is largely **unsupported** by the data, whereas the claim that Holmesburg experienced a drastic - approximately 17% percentage point - increase in white poverty **cannot be determined** by current methods and available data. Furthermore, the claim that the Tioga neighborhood experienced the largest drop in median income is **unsupported** based on my analysis. 
+Many North and West Philadelphia neighborhoods experience disproportionately higher rates of poverty and suffer from glaring income disparities compared to Philadelphia at large. With the new release of the 2013-2017 American Community Survey (ACS) estimates, this new data release will shed light on the economic disparities present within Philadelphia neighborhoods. For example: 
+
+* Riverfront experienced the largest decreases in median household income in Philadelphia, with an approximate median household income loss of over $15,000
+* Holmesburg experienced an increase in white poverty rates of approximately 9.7% percentage points, though this measure is only somewhat reliable
+* Carroll Park, Packer Park, and Penrose experienced the highest estimated increase in poverty rates compared to other Philadelphia neighborhoods
+
+
 
