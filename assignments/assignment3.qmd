@@ -208,7 +208,7 @@ compareyrs_poverty %>%
   coord_flip() +
   theme_minimal() +
   labs(title = "Neighborhoods with the largest increase in poverty rate",
-       subtitle = "2006–2010 vs 2013–20217, ACS 5-year estimates",
+       subtitle = "2006–2010 vs 2013–2017, ACS 5-year estimates",
        x = NULL, y = "% Increase",
        fill = NULL, caption = "**Statistically significant results")
 
