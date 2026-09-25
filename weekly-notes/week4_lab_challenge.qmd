@@ -48,12 +48,12 @@ This is the same `get_acs()` call you already know. The only new part is `geomet
 philly_tracts <- get_acs(
   geography = "tract",
   state = "PA",
-  county = "___",
+  county = "Philadelphia",
   variables = c(med_inc = "B19013_001",
                 total_pop = "B01003_001"),
   year = 2023,
   output = "wide",
-  geometry = ___
+  geometry = TRUE
 )
 
 class(philly_tracts)
@@ -69,7 +69,7 @@ Now repeat the Week 3 steps. **A data frame goes in, a data frame comes out.** T
 philly_tracts <- philly_tracts %>%
   filter(total_popE > 0) %>%
   mutate(
-    med_inc_se = med_incM / ___,
+    med_inc_se = med_incM / med_incE,
     med_inc_cv = (med_inc_se / med_incE) * 100,
     reliability = case_when(
       med_inc_cv < 12  ~ "High",
@@ -87,7 +87,7 @@ Your first map. It's just ggplot with a new geom:
 ```{r}
 #| label: first-map
 ggplot(philly_tracts) +
-  geom_sf(aes(fill = ___), color = NA) +
+  geom_sf(aes(fill = med_incE), color = NA) +
   scale_fill_viridis_c(labels = scales::dollar) +
   theme_void() +
   labs(title = "Median household income, Philadelphia tracts",
@@ -99,7 +99,7 @@ ggplot(philly_tracts) +
 ```{r}
 #| label: na-check
 philly_tracts %>%
-  filter(is.na(___)) %>%
+  filter(is.na(med_incE)) %>%
   nrow()
 ```
 
@@ -133,7 +133,7 @@ Now join the 2015 table onto your tracts. The key is the column both tables shar
 ```{r}
 #| label: left-join
 philly_tracts <- philly_tracts %>%
-  left_join(income_15, by = "___")
+  left_join(income_15, by = "GEOID")
 
 nrow(philly_tracts)   # did the row count change?
 ```
@@ -146,7 +146,7 @@ philly_tracts %>%
   st_drop_geometry() %>%
   summarize(
     n_tracts = n(),
-    no_2015_match = sum(is.na(___))
+    no_2015_match = sum(is.na(med_incE))
   )
 ```
 
@@ -162,9 +162,10 @@ philly_tracts %>%
   head(10)
 
 # 2015 tracts with no 2023 partner: anti_join keeps rows with NO match
-income_15 %>%
+nojoin <- income_15 %>%
   anti_join(st_drop_geometry(philly_tracts), by = "GEOID") %>%
   head(10)
+
 ```
 
 **Discuss as a team:** Did these places move? What changed between 2015 and 2023? Why can't `left_join()` fix this? Keep your answer in mind; Part 3 comes back to it.
@@ -192,10 +193,12 @@ Now check the CRS of both layers.
 ```{r}
 #| label: crs-check
 st_crs(philly_tracts)$epsg
-st_crs(___)$epsg
+st_crs(stations)$epsg
 ```
 
 **Predict before you run:** The two numbers are different. What will happen if you try to join them?
+
+These two datasets have different coordinate systems, so I think that they will not join.
 
 ```{r}
 #| label: crs-fail
@@ -212,13 +215,14 @@ That error is sf protecting you. Fix it by **translating** both layers into Penn
 
 ```{r}
 #| label: transform
-philly_tracts <- philly_tracts %>% ___(crs = 2272)
-stations      <- stations %>% ___(crs = 2272)
+philly_tracts <- philly_tracts %>% st_transform(crs = 2272)
+stations      <- stations %>% st_transform(crs = 2272)
 
 st_crs(philly_tracts)$units   # what units are we in now?
 ```
 
 **Write down the units.** Every number you type from now on is in these units.
+US-FT
 
 ---
 
@@ -244,7 +248,8 @@ Now go the other way and count stations **per tract**. The first route is the We
 #| label: count-route1
 station_counts <- stations_with_tract %>%
   st_drop_geometry() %>%
-  ___(GEOID)
+  group_by(GEOID) %>%
+  summarize(count = n())
 ```
 
 The second route counts directly:
@@ -284,14 +289,14 @@ Instead, find the nearest station for each tract, then measure only that one dis
 
 ```{r}
 #| label: nearest
-nearest_idx <- st_nearest_feature(centroids, ___)
+nearest_idx <- st_nearest_feature(centroids, stations)
 
 philly_tracts <- philly_tracts %>%
   mutate(
     dist_ft = as.numeric(
-      st_distance(centroids, stations[nearest_idx, ], by_element = ___)
+      st_distance(centroids, stations[nearest_idx, ], by_element = TRUE)
     ),
-    dist_mi = dist_ft / ___
+    dist_mi = dist_ft / 5280
   )
 
 summary(philly_tracts$dist_mi)
@@ -306,7 +311,7 @@ Build a **half-mile** zone around every station and merge the circles into one s
 ```{r}
 #| label: buffer
 station_zone <- stations %>%
-  st_buffer(dist = ___) %>%
+  st_buffer(dist = 5280/2) %>%
   st_union()
 ```
 
@@ -315,7 +320,7 @@ station_zone <- stations %>%
 ```{r}
 #| label: filter-disjoint
 outside_zone <- philly_tracts %>%
-  st_filter(station_zone, .predicate = ___)
+  st_filter(station_zone, .predicate = st_intersects)
 
 nrow(outside_zone)
 ```
@@ -363,6 +368,7 @@ You now have three different definitions of "has access":
 ```{r}
 #| label: challenge
 # Your team's code here
+
 
 
 
