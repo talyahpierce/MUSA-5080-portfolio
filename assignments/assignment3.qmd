@@ -388,7 +388,7 @@ compareyrs_income %>%
   coord_flip() +
   theme_minimal() +
   labs(title = "Neighborhoods with the largest decreases in median income",
-       subtitle = "2006–2010 vs 2013–20217, ACS 5-year estimates",
+       subtitle = "2006–2010 vs 2013–2017, ACS 5-year estimates",
        x = NULL, y = "Change in Median Income ($)",
        fill = NULL, caption = "**Statistically significant results")
 
