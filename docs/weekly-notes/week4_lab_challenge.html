@@ -253,21 +253,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   |                                                                            
   |=                                                                     |   2%
   |                                                                            
+  |==                                                                    |   2%
+  |                                                                            
   |==                                                                    |   3%
   |                                                                            
   |===                                                                   |   4%
   |                                                                            
   |===                                                                   |   5%
   |                                                                            
-  |====                                                                  |   6%
+  |====                                                                  |   5%
+  |                                                                            
+  |=====                                                                 |   6%
   |                                                                            
   |=====                                                                 |   7%
   |                                                                            
-  |=====                                                                 |   8%
+  |======                                                                |   8%
   |                                                                            
   |======                                                                |   9%
   |                                                                            
   |=======                                                               |  10%
+  |                                                                            
+  |=======                                                               |  11%
   |                                                                            
   |========                                                              |  11%
   |                                                                            
@@ -331,13 +337,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   |                                                                            
   |=============================                                         |  41%
   |                                                                            
-  |==============================                                        |  42%
+  |=============================                                         |  42%
   |                                                                            
   |==============================                                        |  43%
   |                                                                            
   |===============================                                       |  44%
   |                                                                            
-  |================================                                      |  45%
+  |===============================                                       |  45%
   |                                                                            
   |================================                                      |  46%
   |                                                                            
@@ -352,6 +358,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   |====================================                                  |  51%
   |                                                                            
   |====================================                                  |  52%
+  |                                                                            
+  |=====================================                                 |  52%
   |                                                                            
   |=====================================                                 |  53%
   |                                                                            
@@ -379,25 +387,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   |                                                                            
   |==============================================                        |  65%
   |                                                                            
-  |==============================================                        |  66%
+  |===============================================                       |  66%
   |                                                                            
   |===============================================                       |  67%
   |                                                                            
   |================================================                      |  68%
   |                                                                            
-  |================================================                      |  69%
+  |=================================================                     |  69%
   |                                                                            
   |=================================================                     |  70%
   |                                                                            
   |==================================================                    |  71%
   |                                                                            
-  |==================================================                    |  72%
+  |===================================================                   |  72%
   |                                                                            
   |===================================================                   |  73%
   |                                                                            
   |====================================================                  |  74%
   |                                                                            
-  |====================================================                  |  75%
+  |=====================================================                 |  75%
   |                                                                            
   |=====================================================                 |  76%
   |                                                                            
@@ -405,11 +413,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   |                                                                            
   |=======================================================               |  78%
   |                                                                            
-  |=======================================================               |  79%
-  |                                                                            
   |========================================================              |  80%
   |                                                                            
-  |=========================================================             |  81%
+  |========================================================              |  81%
   |                                                                            
   |=========================================================             |  82%
   |                                                                            
@@ -417,27 +423,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   |                                                                            
   |===========================================================           |  84%
   |                                                                            
-  |===========================================================           |  85%
+  |============================================================          |  85%
   |                                                                            
-  |============================================================          |  86%
+  |=============================================================         |  86%
   |                                                                            
   |=============================================================         |  87%
   |                                                                            
   |==============================================================        |  88%
   |                                                                            
-  |==============================================================        |  89%
+  |===============================================================       |  89%
   |                                                                            
   |===============================================================       |  90%
   |                                                                            
   |================================================================      |  91%
   |                                                                            
-  |================================================================      |  92%
+  |=================================================================     |  92%
   |                                                                            
   |=================================================================     |  93%
   |                                                                            
   |==================================================================    |  94%
   |                                                                            
-  |==================================================================    |  95%
+  |===================================================================   |  95%
   |                                                                            
   |===================================================================   |  96%
   |                                                                            
@@ -613,31 +619,31 @@ Note
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(stations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 319</code></pre>
+<pre><code>[1] 321</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(stations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 319
+<pre><code>Rows: 321
 Columns: 34
 $ id                     &lt;int&gt; 3004, 3005, 3006, 3007, 3008, 3009, 3010, 3012,…
 $ name                   &lt;chr&gt; "Municipal Services Building Plaza", "Welcome P…
 $ totalDocks             &lt;int&gt; 23, 13, 17, 20, 17, 14, 22, 27, 25, 11, 15, 15,…
-$ docksAvailable         &lt;int&gt; 23, 6, 13, 16, 14, 13, 19, 10, 21, 9, 5, 4, 11,…
-$ bikesAvailable         &lt;int&gt; 0, 5, 1, 2, 2, 1, 2, 17, 4, 1, 9, 8, 5, 0, 1, 0…
-$ classicBikesAvailable  &lt;int&gt; 0, 1, 0, 1, 0, 1, 1, 4, 3, 0, 1, 1, 0, 0, 1, 0,…
+$ docksAvailable         &lt;int&gt; 22, 8, 6, 4, 12, 10, 21, 13, 22, 7, 8, 1, 15, 1…
+$ bikesAvailable         &lt;int&gt; 0, 4, 9, 14, 0, 1, 1, 14, 3, 2, 6, 8, 0, 1, 2, …
+$ classicBikesAvailable  &lt;int&gt; 0, 1, 3, 4, 0, 0, 0, 4, 2, 1, 0, 1, 0, 0, 0, 0,…
 $ smartBikesAvailable    &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ electricBikesAvailable &lt;int&gt; 0, 4, 1, 1, 2, 0, 1, 13, 1, 1, 8, 7, 5, 0, 0, 0…
-$ rewardBikesAvailable   &lt;int&gt; 0, 5, 1, 2, 2, 1, 2, 17, 4, 1, 9, 8, 5, 0, 1, 0…
-$ rewardDocksAvailable   &lt;int&gt; 23, 6, 14, 16, 14, 13, 18, 10, 21, 9, 6, 4, 11,…
+$ electricBikesAvailable &lt;int&gt; 0, 3, 6, 10, 0, 1, 1, 10, 1, 1, 6, 7, 0, 1, 2, …
+$ rewardBikesAvailable   &lt;int&gt; 0, 4, 9, 14, 0, 1, 1, 14, 3, 2, 6, 8, 0, 1, 2, …
+$ rewardDocksAvailable   &lt;int&gt; 22, 8, 6, 4, 15, 12, 20, 13, 22, 7, 8, 4, 16, 1…
 $ kioskStatus            &lt;chr&gt; "FullService", "FullService", "FullService", "F…
-$ kioskPublicStatus      &lt;chr&gt; "Active", "Unavailable", "Active", "Active", "A…
-$ kioskConnectionStatus  &lt;chr&gt; "Active", "Unresponsive", "Active", "Active", "…
+$ kioskPublicStatus      &lt;chr&gt; "Active", "Active", "Active", "Active", "Active…
+$ kioskConnectionStatus  &lt;chr&gt; "Active", "Active", "Active", "Active", "Active…
 $ kioskType              &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
 $ addressStreet          &lt;chr&gt; "1401 John F. Kennedy Blvd.", "191 S. 2nd St.",…
 $ addressCity            &lt;chr&gt; "Philadelphia", "Philadelphia", "Philadelphia",…
 $ addressState           &lt;chr&gt; "PA", "PA", "PA", "PA", "PA", "PA", "PA", "PA",…
 $ addressZipCode         &lt;chr&gt; "19102", "19106", "19104", "19107", "19122", "1…
-$ bikes                  &lt;chr&gt; "[ ]", "[ { \"dockNumber\": 3, \"isElectric\": …
+$ bikes                  &lt;chr&gt; "[ { \"dockNumber\": 16, \"isElectric\": true, …
 $ closeTime              &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
 $ eventEnd               &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
 $ eventStart             &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
@@ -738,11 +744,11 @@ Label or translation?
 <div class="cell">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(philly_tracts<span class="sc">$</span>n_stations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 302</code></pre>
+<pre><code>[1] 304</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(stations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 319</code></pre>
+<pre><code>[1] 321</code></pre>
 </div>
 </div>
 <p><strong>These probably don’t match. Discuss as a team:</strong> Why not? Find at least one station that explains the gap.</p>
@@ -758,7 +764,7 @@ Label or translation?
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">st_distance</span>(centroids, stations))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 391 319</code></pre>
+<pre><code>[1] 391 321</code></pre>
 </div>
 </div>
 <p>Instead, find the nearest station for each tract, then measure only that one distance:</p>
@@ -776,7 +782,7 @@ Label or translation?
 <span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(philly_tracts<span class="sc">$</span>dist_mi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
- 0.01893  0.15554  0.41382  1.84137  2.73916 10.93093 </code></pre>
+ 0.01893  0.15477  0.35357  1.74711  2.25126 10.93093 </code></pre>
 </div>
 </div>
 <hr>
@@ -796,7 +802,7 @@ Label or translation?
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(outside_zone)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 229</code></pre>
+<pre><code>[1] 238</code></pre>
 </div>
 </div>
 <p><strong>Cut the dough:</strong> what share of each tract’s area falls inside the zone?</p>
