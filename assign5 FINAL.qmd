@@ -1110,6 +1110,6 @@ Talyah → Put together and edited the complete final document including everyon
 
 
 ### AI Team Statement
-**What was your team's AI policy and how was AI used in this assignment?**
+**What was your team's AI policy and how was AI used in this assignment?** 
 
 We used AI to merge scripts/ideas from everyone or for debugging purposes, otherwise the base script were written individually by each member. 
