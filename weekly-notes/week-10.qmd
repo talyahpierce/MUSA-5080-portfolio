@@ -1,0 +1,20 @@
+---
+title: "Week 10: Spatial Autocorrelation and LISA"
+description: "Using spatial data in R."
+date: 2026-09-18
+---
+
+## What We Did
+
+
+
+## Key Concepts
+
+**Localized Indicators of Spatial Association (LISA)**
+LISA refers to the spatial statistics used to measure the degree of spatial autocorrelation and clustering around individual locations on map. Clusters of high-high (individual-cluster) and low-low (individual-cluster) suggests that there is a pocket of space the model under or overestimates. If there are clusters of high-low or low-high, then that suggests that there are individual outliers within the clusters.
+
+
+**Contiguity Matrices**
+Queen contiguity refers to any polygons that border each other, either directly or across. Rook contiguity refers to any polygons that directly borders another.
+
+
