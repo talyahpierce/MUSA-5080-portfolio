@@ -37,6 +37,8 @@ The test houses were held out by house, not by sale, so a house that sold twice 
 ### Rules
 
 ::: {.callout-important}
+
+
 ## 1. Clean training rows once, in Part 1. Never drop test rows.
 You must predict every test house, so fill NAs in a feature rather than filtering.
 
@@ -69,7 +71,7 @@ No features built from other houses' sale prices.
 
 These helpers are to help you get off the ground.
 
-```{r}
+```{r, include=FALSE}
 #| label: setup
 library(tidyverse)
 library(tidycensus)
@@ -80,7 +82,7 @@ library(nngeo)
 options(scipen = 999)
 ```
 
-```{r}
+```{r, include = FALSE}
 #| label: helpers
 check_na <- function(formula, df) {
   vars <- all.vars(formula)
@@ -142,7 +144,7 @@ cv_moran <- function(formula, data){
 
 Build every feature on `all_sales`, so training and test houses get identical features. Split off `train` again whenever you add something.
 
-```{r}
+```{r, include = FALSE}
 #| label: load
 all_sales <- bind_rows(
   read_csv("data/chicago_train.csv", show_col_types = FALSE) %>% mutate(split = "train"),
@@ -162,16 +164,18 @@ Useful sources: the [Chicago Data Portal](https://data.cityofchicago.org) (find 
 
 **Decide which training sales are market sales. Record each rule, why, and how many it removed. Then explore: at least four plots, including a map of price.**
 
-In building our model, we only included homes price/sqft below the 0.1st percentile (\$11.70/sqft). Extreme values below this cutoff point appeared to be off-market sales; a lot of larger homes sold for less than expected under ~ \$15/sqft, which suggested they weren’t representative/good training observations. We removed 24 training observations due to this reason. On the other end of the spectrum, we removed homes where Price/sqft was above the 99.9th percentile (\$1300/sqft). Extreme values above this cutoff point were mostly multi-parcel sales which seemed to reflect the price of the full sale vs. the individual home (e.g., \$21.8 million on a 2000 square foot house). This removed 24 training observations.
+In building our model, we only included homes price/sqft below the 0.1st percentile (\$11.70/sqft). Extreme values below this cutoff point appeared to be off-market sales; a lot of larger homes sold for less than expected under ~ \$15/sqft, which suggested they weren’t representative/good training observations. We removed 24 training observations due to this reason. On the other end of the spectrum, we removed homes where price/sqft was above the 99.9th percentile (\$1300/sqft). Extreme values above this cutoff point were mostly multi-parcel sales which seemed to reflect the price of the full sale vs. the individual home (e.g., \$21.8 million on a 2000 square foot house). This removed 24 training observations.
 
 Lastly, one sale had no census tract match because it was located outside of ACS tract boundaries and had no associated ACS values. Because of this, we removed 1 training observation.
 
 In total, we removed 49 observations. We used price/sqft to try to normalize the metric across home sizes/types. A lot of very expensive (high price/sqft) homes at the high end seemed to be actual sales, possibly more historic homes in more expensive parts of the city.
 
+The four plots will be displayed below the variable data cleaning code.
 
 ### Base dataset cleaning
 ```{r}
 #| label: part-1
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 # Check NAs
 # pull training set out, drop geom
@@ -210,6 +214,7 @@ for (column in na_cols) {
 
 
 ```{r}
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 # compare missing to non-missing homes
 # looking at how medians of other covariates differ
@@ -235,14 +240,14 @@ for (column in na_cols) {
 na_exam
 ```
 
-For 4 of the 6 variables with missingness in the training set median age appears to be significantly lower than the median age of homes where the values are present. Might be the case that newer homes haven't had the data properly collected/listed yet. 
+For 4 of the 6 variables with missingness in the training set median age appears to be significantly lower than the median age of homes where the values are present. It might be the case that newer homes haven't had the data properly collected/listed yet. 
 `num_fireplaces` and `num_half_baths` have the highest n missing and both have this issue - so will fill with median values. 
-Will do the same for garage_size and full_basement even tho relationship is less explainable. but only 13 NAs in training set across both.
-Apply to train and test
+We will do the same for garage_size and full_basement even tho relationship is less explainable. but only 13 NAs in training set across both.
 
 
 ```{r}
 #| label: fill-NAs-median
+#| code-fold: true
 # -----------------------------------------------------------------------
 # fill NAs, using the training data to calc median value
 for (column in na_cols) {
@@ -256,6 +261,7 @@ for (column in na_cols) {
 
 ```{r}
 #| label: price-dist
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 # now look into outcome outliers
 #re-write test and train w/ adjusted sales df
@@ -276,10 +282,9 @@ ggplot(train, aes(x = log(sale_price))) +
   theme_minimal()
 ```
 
-Would be nice if we could log this
-
 ```{r}
 #| label: price-sqft-outliers
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 # build price per square foot to check for outliers
 train$price_sqft <- train$sale_price / (train$building_000sf * 1000)
@@ -300,8 +305,9 @@ train %>%
 ```
 
 
-```{r}
+```{r, ECHO=FALSE}
 #| label: drop-price-sqft-outliers
+#| code-fold: TRUE
 # ------------------
 # drop outliers using price_sqft
 # choosing to drop obs outside of 0.1 and 99.9 pctiles of price/square ft
@@ -326,10 +332,11 @@ sales <- sales %>%
 nrow(sales) - nrow(all_sales)
 # 
 ```
-Dropped 48 homes from train set for unrealistic price per sqft
+We dropped 48 homes from train set for unrealistic price per sqft
 
 ```{r}
 #| label: engineered-features
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 # Year + quarter factor var
 sales$year_qtr <- factor(paste0(sales$year, "Q", sales$sale_qrt))
@@ -349,8 +356,9 @@ test <- sales %>% filter(split == "test")
 ```
 
 
-```{r}
+```{r, ECHO = FALSE}
 #| label: plot-distributions
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 train_df <- st_drop_geometry(train)
 #summary(train_df)
@@ -367,11 +375,8 @@ for (var in cont_vars) {
 }
 ```
 
-+ squared term for sqft
-age could be quadtric or cubic? or catgorical -> bins (0, 25, 50, 100, +)
-maybe log for lotsize
 
-```{r}
+```{r, include = FALSE}
 #| label: visualize-distributions-2
 count_vars <- c("num_bedrooms", "num_full_baths", 
                 "num_half_baths", "num_fireplaces", 
@@ -384,6 +389,7 @@ count_vars <- c("num_bedrooms", "num_full_baths",
 
 ```{r}
 #| label: pull-ACS-vars
+#| include: false
 # -----------------------------------------------------------------------
 # pull
 acs_vars <- c(
@@ -413,7 +419,10 @@ tracts <- get_acs(
   geometry = TRUE,
   output = "wide") %>%
   st_transform(3435)
+```
 
+```{r}
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 tracts <- tracts %>%
   mutate(
@@ -436,11 +445,12 @@ tracts <- tracts[!st_is_empty(tracts), ]
 
 ```
 
-240 tracts missing med_income so need to fill in. Use knn tracts to impute the median.
+There are 240 tracts missing in the median income estmate so we need to fill it in. Use knn tracts to impute the median.
 
 
 ```{r}
 #| label: check-ACS-NAs
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 # Check for NA tracts
 acs_cols <- c("med_incomeE", "pct_owner", "pct_coll",
@@ -455,6 +465,7 @@ for (column in acs_cols) {
 
 ```{r}
 #| label: knn-fill-ACS-NAs
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 # Fill NA tracts w/ 5 knn tracts' avg values
 
@@ -484,6 +495,7 @@ for (column in acs_cols) {
 
 ```{r}
 #| label: merge-ACS-sales
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 # merge geoms + ACS back into reduced sales df 
 sales <- sales %>% left_join(., all_geom, by = "id") %>%
@@ -506,6 +518,7 @@ We dropped one house from training set because it didn't match to any ACS tract.
 
 ```{r}
 #| label: merge-neighborhoods-sales
+#| code-fold: TRUE
 # crimes etc. might need filtering using socrata_get ^^ SQL commands
 
 # -----------------------------------------------------------------------
@@ -531,11 +544,12 @@ for (grp in c("train", "test")) {
 } # 24 train, 7 test
 ```
 
-24 train missing, 7 test missing
+There are 24 observations from train and 7 observations from test missing.
 
 
 ```{r}
 #| label: check-neighborhoods
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 # for each sale w/ NA neihgborhood, find nearest + assign
 nearest_idx <- st_nearest_feature(sales[is.na(sales$pri_neigh), ], nbhds)
@@ -554,7 +568,7 @@ head(nbhd_counts, 15)
 # merge these their nearest neighborhood instead
 ```
 
-Small neighborhoods won't have enough training info to produce reliable predictions in test set. Need to aggregate to larger neighborhoods.
+The small neighborhoods won't have enough training info to produce reliable predictions in test set. We need to aggregate to larger neighborhoods.
 
 ```{r}
 #| label: combine-small-neighborhoods
@@ -590,10 +604,11 @@ sales <- left_join(sales,
 
 ```
 
-Created new variable nbhd_group: For any houses (train + test) that fell in neighborhoods with < 20 training observations, shift their assigned neighborhood to the nearest neighborhood with n train >=20. 
+We created new variable nbhd_group for any houses (train + test) that fell in neighborhoods with < 20 training observations. This will shift their assigned neighborhood to the nearest neighborhood with n train >=20. 
 
 ```{r}
 #| label: dist-to-features
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 # Dist to center of Loop neighborhood
 loop_pt <- nbhds %>%
@@ -655,6 +670,7 @@ for (column in c("dist_l_mi", "dist_lake_mi", "dist_school_mi", "pct_no_vehicle"
 ```
 ```{r}
 #| label: KNN-and-buffer
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 # Violent crimes KNN
 violent <- socrata_get(
@@ -685,6 +701,8 @@ nrow(vacant)
 sales$vacant_660ft <- lengths(st_intersects(st_buffer(sales, 660), vacant))
 ```
 
+
+
 **What in your exploration shaped your modeling choices?**
 
 Our exploration showed that sale prices depend on property characteristics and location. We included relationships between sale price and building size, age, and lot size. To account for nonlinear relationships, we tested a squared building-size term. Some property characteristics had missing values and so we filled in the missing values with the median of all of the values. We quickly found out that prices differ between neighborhoods. So, we decided to include neighborhood and census tract variables (ex. income, poverty, homeownership). Some neighborhoods had few sales and so we combined them with nearby, larger neighborhoods. We tried out different spatial variables to see if they would create any improvements (ex. Distance to transit stops, distance to schools, etc.). To see whether neighborhood conditions helped explain sale prices we included nearby violent crime and vacant building complaints. Overall there was much trial and error that went into testing characteristics we believed could improve the model.
@@ -695,7 +713,7 @@ Our exploration showed that sale prices depend on property characteristics and l
 
 Start with a structure-only baseline. Then add features in steps you can learn from, logging each one. Keep the log in a tibble with columns `model`, `added`, `cv_rmse`, `moran_i`, `notes`.
 
-```{r}
+```{r, include=FALSE}
 #| label: part-2 helpers
 # -----------------------------------------------------------------------
 # helper
@@ -738,6 +756,7 @@ plot_resid <- function(formula, model){
 
 ```{r}
 #| label: models
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 sales <- st_as_sf(sales) # resave as sf
 train <- sales %>% filter(split == "train") #resave
@@ -872,6 +891,7 @@ ggplot(train) +
 
 ```{r}
 #| label: group-models
+#| code-fold: TRUE
 # -----------------------------------------------------------------------
 # MODEL 9
 # CTA distance
@@ -908,8 +928,8 @@ model_log <- add_entry(f_m12, train, "m12", "% households without a vehicle",
 # MODEL 10 is best - dist to lake
 
 # check if any vars seem unhelpful -- not signif at 0.05
-coefs_m10 <- summary(lm(f_m10, train))$coefficients
-coefs_m10[coefs_m10[, "Pr(>|t|)"] > 0.05, ]
+#coefs_m10 <- summary(lm(f_m10, train))$coefficients
+#coefs_m10[coefs_m10[, "Pr(>|t|)"] > 0.05, ]
 #                                                          Pr(>|t|)
 # num_bedrooms                                           0.64489233
 # central_air                                            0.16811059
@@ -964,6 +984,7 @@ Show your final model, the model log, and baseline vs. final residual maps.
 
 ```{r}
 #| label: part-3
+#| code-fold: TRUE
 
 f_final <- f_m15
 
@@ -1011,7 +1032,7 @@ Based on the plots above, the model fails the most in the southern part of Chica
 Based on the ratio of predicted values to sale prices, it seems that homes in the south part of Chicago are over-valued and their owners are over-taxed in comparison to other areas, possibly in part due to the reasons described above. In the initial cleaning stages of our model creation we removed homes that were above the 99.9th percentile in sales price and homes that were below the 0.1th percentile in sales price. This translates to homes that are relatively higher in sales price being under-predicted and homes that are relatively lower in sales prices being over-predicted due to the constrained range of training data. Furthermore, this connects to “The Tax Divide” which exposed how many lower-income households’ homes in Chicago were over-assessed relative to commercial and high-end residential properties. Comparing the two maps that show the ratio of predicted values to sale prices and median income, the model mirrors the same systematic biases present in Cook County’s property tax assessments in which housing in lower-income areas is over-predicted.
 
 
-```{r}
+```{r, echo=FALSE}
 #| label: part-4
 
 train$Ratio <- train$pred_final/train$sale_price
@@ -1044,7 +1065,7 @@ ggplot(train) +
 
 ---
 
-## Part 5: Predict the test houses (provided)
+## Part 5: Predict the test houses
 
 Refit your final recipe on all training sales, then predict every test house. Set `f_final` to your final formula.
 
@@ -1067,7 +1088,7 @@ write_csv(preds, "team_7_predictions.csv")     # replace XX with your team numbe
 
 ---
 
-## Part 6: Reflection (about 300 words, as a team)
+## Part 6: Reflection
 
 **Read one coefficient twice: once as β̂, once for what it does to ŷ.**
 
@@ -1089,6 +1110,6 @@ Talyah → Put together and edited the complete final document including everyon
 
 
 ### AI Team Statement
-**What was your team's AI policy and how was AI used in this assignment?**
+**What was your team's AI policy and how was AI used in this assignment?** 
 
 We used AI to merge scripts/ideas from everyone or for debugging purposes, otherwise the base script were written individually by each member. 
