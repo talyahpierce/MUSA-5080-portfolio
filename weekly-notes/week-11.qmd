@@ -1,0 +1,19 @@
+---
+title: "Week 11: Poisson regression"
+description: 
+date: 2026-10-30
+---
+
+## What We Did
+
+
+
+## Key Concepts
+
+**Poisson regression**
+
+Typically you use the Poisson regression when your dependent (outcome_ variable is a count of discrete events (sch as the number of goals scored, hospital visits, crime incidents , etc.). It is preferred to logistic regression because it models rarer events. 
+
+Poisson regression assumes that the variance and the mean are around the same number. If they are not and the conditional variance is substantially greater than the mean, then use a negative binomial regression.
+
+
