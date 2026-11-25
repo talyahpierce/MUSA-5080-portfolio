@@ -1,6 +1,6 @@
 ---
-title: "Assignment 3: Verify the Claim"
-subtitle: "Testing a published claim about neighborhood change against the data behind it"
+title: "Test the Claim!"
+subtitle: "Investigating a published claim about neighborhood change against the data behind it using American Community Survey data."
 author: "Talyah Pierce"
 date: today
 format:
@@ -10,8 +10,6 @@ format:
     code-summary: "Show code"
     embed-resources: true
 ---
-
-## Loading necessary packages ##
 
 ```{r}
 #| include: false
