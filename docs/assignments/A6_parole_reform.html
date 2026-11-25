@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Talyah Pierce">
-<meta name="dcterms.date" content="2026-11-24">
+<meta name="dcterms.date" content="2026-11-25">
 
 <title>Assignment 6: Parole Reform – Talyah Pierce - MUSA 5080 Portfolio</title>
 <style>
@@ -4839,7 +4839,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 24, 2026</p>
+      <p class="date">November 25, 2026</p>
     </div>
   </div>
   
@@ -5606,7 +5606,12 @@ Predicted         0         1
 <li>End with one sentence: <strong>“I would / would not deploy this for Use <strong><em>, unless </em></strong>.”</strong></li>
 </ol>
 <p>Write to a deputy commissioner, not to a statistician. No code, no jargon you haven’t explained.</p>
-<p><em>Your memo:</em></p>
+<p>Dear Deputy Commissioner,</p>
+<p>The Department of Community Supervision should use different thresholds based on the use of the prediction model. Use A emphasizes more restrictive practices (i.e., electronic monitoring, more check ins, higher revocation), whereas Use B emphasizes more socially integrative practices. In predicting recidivism rates, a higher threshold indicates that there is likely to be a higher false positive rate of recidivism, meaning that the model will predict that more people will be rearrested than the actual amount of people that would be rearrested. On the other hand, a false negative would suggest that the threshold is too low and that someone classified as a non-risk will go on to be rearrest.</p>
+<p>For Use A (more restrictive supervision), I conclude that the ideal threshold would sit around 0.65, allowing for a higher rate of potential false positives (prefers sensitivity) as opposed to false negatives (prefers specificity). Based on the graph above, it seems that the gap between .7 to .75 sees the highest trade off between sensitivity and specificity, in which .7 keeps a higher level of sensitivity. Here, the cost of a false positive is that someone is deemed as high risk without being rearrested and will still be highly monitored.</p>
+<p>Alternatively, for Use B (priority for reentry services), I conclude that the ideal threshold would sit around 0.30, instead allowing for a higher rate of potential false negatives (prefers specificity) as opposed to false positives (prefers sensitivity). In this situation, a false negative would be detrimental to someone because it would reduce their probability of getting access to beneficial job placement and/or housing services. In this case, even a false positive would not pose a large risk as someone that will not be rearrested can still benefit from reentry services.</p>
+<p>Although the model does not factor in race as a variable, the variables the model does include can still distinguish between racial categories. At a threshold of 0.30, there is an approximately 12 percentage point higher rate of Black individuals being labeled as high risk when they were not rearrested in comparison to white individuals. Race may come through in the model as an instrumental variable that is associated with other variables. For example, black individuals in the data set tended to be older than white individuals and had more male representation.</p>
+<p>I would not deploy this use for Use A as it would likely overpresent Black individuals more higher monitoring, which could then actualize in higher recidivism rates primarily due to higher surveillance. I would deploy this for Use B as more social service access does not detriment anyone deemed as high risk.</p>
 </section>
 <section id="optional-challenge-no-extra-points.-just-extra-muscles." class="level1">
 <h1>Optional challenge (no extra points. just extra muscles.)</h1>
@@ -6594,15 +6599,25 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb51-532"><a href="#cb51-532" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-533"><a href="#cb51-533" aria-hidden="true" tabindex="-1"></a>Write to a deputy commissioner, not to a statistician. No code, no jargon you haven&#39;t explained.</span>
 <span id="cb51-534"><a href="#cb51-534" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-535"><a href="#cb51-535" aria-hidden="true" tabindex="-1"></a>*Your memo:*</span>
+<span id="cb51-535"><a href="#cb51-535" aria-hidden="true" tabindex="-1"></a>Dear Deputy Commissioner, </span>
 <span id="cb51-536"><a href="#cb51-536" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-537"><a href="#cb51-537" aria-hidden="true" tabindex="-1"></a><span class="fu"># Optional challenge (no extra points. just extra muscles.)</span></span>
+<span id="cb51-537"><a href="#cb51-537" aria-hidden="true" tabindex="-1"></a>The Department of Community Supervision should use different thresholds based on the use of the prediction model. Use A emphasizes more restrictive practices (i.e., electronic monitoring, more check ins, higher revocation), whereas Use B emphasizes more socially integrative practices. In predicting recidivism rates, a higher threshold indicates that there is likely to be a higher false positive rate of recidivism, meaning that the model will predict that more people will be rearrested than the actual amount of people that would be rearrested. On the other hand, a false negative would suggest that the threshold is too low and that someone classified as a non-risk will go on to be rearrest.</span>
 <span id="cb51-538"><a href="#cb51-538" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-539"><a href="#cb51-539" aria-hidden="true" tabindex="-1"></a><span class="in">`Supervision_Risk_Score_First`</span> is the score Georgia&#39;s existing risk tool assigned at the start of supervision. Treat a score of 7 or higher as &quot;high risk&quot; and compute its false positive rates by race on the test set. Does the state&#39;s current tool look better or worse than yours?</span>
+<span id="cb51-539"><a href="#cb51-539" aria-hidden="true" tabindex="-1"></a>For Use A (more restrictive supervision), I conclude that the ideal threshold would sit around 0.65, allowing for a higher rate of potential false positives (prefers sensitivity) as opposed to false negatives (prefers specificity). Based on the graph above, it seems that the gap between .7 to .75 sees the highest trade off between sensitivity and specificity, in which .7 keeps a higher level of sensitivity. Here, the cost of a false positive is that someone is deemed as high risk without being rearrested and will still be highly monitored. </span>
 <span id="cb51-540"><a href="#cb51-540" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-543"><a href="#cb51-543" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb51-544"><a href="#cb51-544" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here</span></span>
-<span id="cb51-545"><a href="#cb51-545" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb51-541"><a href="#cb51-541" aria-hidden="true" tabindex="-1"></a>Alternatively, for Use B (priority for reentry services), I conclude that the ideal threshold would sit around 0.30, instead allowing for a higher rate of potential false negatives (prefers specificity) as opposed to false positives (prefers sensitivity). In this situation, a false negative would be detrimental to someone because it would reduce their probability of getting access to beneficial job placement and/or housing services. In this case, even a false positive would not pose a large risk as someone that will not be rearrested can still benefit from reentry services. </span>
+<span id="cb51-542"><a href="#cb51-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-543"><a href="#cb51-543" aria-hidden="true" tabindex="-1"></a>Although the model does not factor in race as a variable, the variables the model does include can still distinguish between racial categories. At a threshold of 0.30, there is an approximately 12 percentage point higher rate of Black individuals being labeled as high risk when they were not rearrested in comparison to white individuals. Race may come through in the model as an instrumental variable that is associated with other variables. For example, black individuals in the data set tended to be older than white individuals and had more male representation. </span>
+<span id="cb51-544"><a href="#cb51-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-545"><a href="#cb51-545" aria-hidden="true" tabindex="-1"></a>I would not deploy this use for Use A as it would likely overpresent Black individuals more higher monitoring, which could then actualize in higher recidivism rates primarily due to higher surveillance. I would deploy this for Use B as more social service access does not detriment anyone deemed as high risk. </span>
+<span id="cb51-546"><a href="#cb51-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-547"><a href="#cb51-547" aria-hidden="true" tabindex="-1"></a><span class="fu"># Optional challenge (no extra points. just extra muscles.)</span></span>
+<span id="cb51-548"><a href="#cb51-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-549"><a href="#cb51-549" aria-hidden="true" tabindex="-1"></a><span class="in">`Supervision_Risk_Score_First`</span> is the score Georgia&#39;s existing risk tool assigned at the start of supervision. Treat a score of 7 or higher as &quot;high risk&quot; and compute its false positive rates by race on the test set. Does the state&#39;s current tool look better or worse than yours?</span>
+<span id="cb51-550"><a href="#cb51-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-553"><a href="#cb51-553" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb51-554"><a href="#cb51-554" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here</span></span>
+<span id="cb51-555"><a href="#cb51-555" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
